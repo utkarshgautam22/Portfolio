@@ -40,7 +40,7 @@ interface Project {
 // Configuration
 const GITHUB_USERNAME = 'utkarshgautam22';
 const EXCLUDED_REPOS: string[] = [];
-const FEATURED_REPOS = ['isocode', 'cricket-genie', 'cloud-dev-environment', 'AskMyDocs', 'Portfolio'];
+const FEATURED_REPOS = ['isocode', 'cloud-dev-environment', 'AskMyDocs', 'Portfolio'];
 const PROJECT_ASSETS_FOLDER = 'project-assets'; // Your folder name
 
 // Cache keys
