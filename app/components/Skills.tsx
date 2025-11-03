@@ -1,154 +1,257 @@
 // app/components/Skills.tsx
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 interface Skill {
     name: string;
     percentage: number;
     category: string;
+    icon: string;
+    color: string;
 }
 
 interface SkillCategory {
     icon: string;
     title: string;
+    description: string;
+    gradient: string;
     skills: Skill[];
 }
 
 export default function Skills() {
+    const [activeCategory, setActiveCategory] = useState(0);
+
     const skillCategories: SkillCategory[] = [
         {
             icon: '💻',
             title: 'Programming',
+            description: 'Core programming languages & problem solving',
+            gradient: 'from-blue-500 to-cyan-500',
             skills: [
-                { name: 'Python', percentage: 90, category: 'programming' },
-                { name: 'JavaScript', percentage: 85, category: 'programming' },
-                { name: 'C++', percentage: 80, category: 'programming' },
-                { name: 'C', percentage: 75, category: 'programming' },
-                { name: 'Kotlin', percentage: 70, category: 'programming' }
+                { name: 'Python', percentage: 90, category: 'programming', icon: '🐍', color: 'bg-gradient-to-r from-yellow-400 to-green-500' },
+                { name: 'JavaScript', percentage: 85, category: 'programming', icon: '🟨', color: 'bg-gradient-to-r from-yellow-400 to-yellow-600' },
+                { name: 'C++', percentage: 80, category: 'programming', icon: '⚡', color: 'bg-gradient-to-r from-blue-600 to-purple-600' },
+                { name: 'C', percentage: 75, category: 'programming', icon: '🔷', color: 'bg-gradient-to-r from-blue-400 to-blue-600' },
+                { name: 'Kotlin', percentage: 70, category: 'programming', icon: '🟪', color: 'bg-gradient-to-r from-purple-500 to-pink-500' }
             ]
         },
         {
             icon: '🌐',
             title: 'Frontend',
+            description: 'Modern web development & UI/UX',
+            gradient: 'from-purple-500 to-pink-500',
             skills: [
-                { name: 'React', percentage: 85, category: 'frontend' },
-                { name: 'Next.js', percentage: 80, category: 'frontend' },
-                { name: 'HTML/CSS', percentage: 90, category: 'frontend' },
-                { name: 'Tailwind CSS', percentage: 85, category: 'frontend' }
+                { name: 'React', percentage: 85, category: 'frontend', icon: '⚛️', color: 'bg-gradient-to-r from-cyan-400 to-blue-500' },
+                { name: 'Next.js', percentage: 80, category: 'frontend', icon: '▲', color: 'bg-gradient-to-r from-gray-800 to-black' },
+                { name: 'HTML/CSS', percentage: 90, category: 'frontend', icon: '🎨', color: 'bg-gradient-to-r from-orange-500 to-red-500' },
+                { name: 'Tailwind CSS', percentage: 85, category: 'frontend', icon: '💨', color: 'bg-gradient-to-r from-teal-400 to-cyan-500' }
             ]
         },
         {
             icon: '⚙️',
             title: 'Backend & Tools',
+            description: 'Server-side development & DevOps',
+            gradient: 'from-green-500 to-emerald-500',
             skills: [
-                { name: 'Node.js', percentage: 80, category: 'backend' },
-                { name: 'Express.js', percentage: 75, category: 'backend' },
-                { name: 'MongoDB', percentage: 70, category: 'backend' },
-                { name: 'Docker', percentage: 65, category: 'backend' },
-                { name: 'Git', percentage: 85, category: 'backend' }
+                { name: 'Node.js', percentage: 80, category: 'backend', icon: '🟢', color: 'bg-gradient-to-r from-green-500 to-green-700' },
+                { name: 'Express.js', percentage: 75, category: 'backend', icon: '🚂', color: 'bg-gradient-to-r from-gray-600 to-gray-800' },
+                { name: 'MongoDB', percentage: 70, category: 'backend', icon: '🍃', color: 'bg-gradient-to-r from-green-400 to-green-600' },
+                { name: 'Docker', percentage: 65, category: 'backend', icon: '🐳', color: 'bg-gradient-to-r from-blue-400 to-blue-600' },
+                { name: 'Git', percentage: 85, category: 'backend', icon: '📚', color: 'bg-gradient-to-r from-orange-500 to-red-500' }
             ]
         },
         {
             icon: '🛡️',
             title: 'Cybersecurity',
+            description: 'Security tools & ethical hacking',
+            gradient: 'from-red-500 to-orange-500',
             skills: [
-                { name: 'Network Security', percentage: 75, category: 'security' },
-                { name: 'Reverse Engineering', percentage: 70, category: 'security' },
-                { name: 'CTF Challenges', percentage: 80, category: 'security' },
-                { name: 'Packet Analysis', percentage: 75, category: 'security' }
+                { name: 'Network Security', percentage: 75, category: 'security', icon: '🌐', color: 'bg-gradient-to-r from-blue-500 to-indigo-500' },
+                { name: 'Reverse Engineering', percentage: 70, category: 'security', icon: '🔍', color: 'bg-gradient-to-r from-purple-500 to-pink-500' },
+                { name: 'CTF Challenges', percentage: 80, category: 'security', icon: '🏴‍☠️', color: 'bg-gradient-to-r from-red-500 to-yellow-500' },
+                { name: 'Packet Analysis', percentage: 75, category: 'security', icon: '📡', color: 'bg-gradient-to-r from-green-500 to-teal-500' }
             ]
         },
         {
             icon: '🤖',
             title: 'AI/ML',
+            description: 'Machine learning & data science',
+            gradient: 'from-indigo-500 to-purple-500',
             skills: [
-                { name: 'TensorFlow', percentage: 70, category: 'ai' },
-                { name: 'PyTorch', percentage: 65, category: 'ai' },
-                { name: 'Pandas/NumPy', percentage: 80, category: 'ai' },
-                { name: 'Scikit-learn', percentage: 75, category: 'ai' }
+                { name: 'TensorFlow', percentage: 70, category: 'ai', icon: '🧠', color: 'bg-gradient-to-r from-orange-500 to-red-500' },
+                { name: 'PyTorch', percentage: 65, category: 'ai', icon: '🔥', color: 'bg-gradient-to-r from-red-500 to-red-700' },
+                { name: 'Pandas/NumPy', percentage: 80, category: 'ai', icon: '🐼', color: 'bg-gradient-to-r from-blue-500 to-purple-500' },
+                { name: 'Scikit-learn', percentage: 75, category: 'ai', icon: '⚗️', color: 'bg-gradient-to-r from-orange-400 to-orange-600' }
             ]
         },
         {
             icon: '⚡',
-            title: 'Other',
+            title: 'Other Skills',
+            description: 'Additional technologies & expertise',
+            gradient: 'from-yellow-500 to-orange-500',
             skills: [
-                { name: 'Competitive Programming', percentage: 85, category: 'other' },
-                { name: 'Android Development', percentage: 70, category: 'other' },
-                { name: 'FastAPI/Flask', percentage: 75, category: 'other' },
-                { name: 'Assembly', percentage: 60, category: 'other' }
+                { name: 'Competitive Programming', percentage: 85, category: 'other', icon: '⚔️', color: 'bg-gradient-to-r from-blue-600 to-purple-600' },
+                { name: 'Android Development', percentage: 70, category: 'other', icon: '🤖', color: 'bg-gradient-to-r from-green-400 to-green-600' },
+                { name: 'FastAPI/Flask', percentage: 75, category: 'other', icon: '🚀', color: 'bg-gradient-to-r from-gray-700 to-gray-900' },
+                { name: 'Assembly', percentage: 60, category: 'other', icon: '💾', color: 'bg-gradient-to-r from-gray-500 to-gray-700' }
             ]
         }
     ];
 
     return (
-        <section id="skills" className="section-padding">
+        <section id="skills" className="section-padding bg-gradient-to-br from-gray-50 to-blue-50 dark:from-dark-surface dark:to-gray-900">
             <div className="container-custom">
                 {/* Section Header */}
                 <div className="text-center mb-16">
-                    <div className="inline-block px-6 py-2 bg-gray-100 dark:bg-dark-bg border border-gray-200 dark:border-dark-border rounded-full text-primary-500 font-semibold text-sm mb-4">
+                    <div className="inline-block px-6 py-2 bg-white/80 dark:bg-dark-bg/80 backdrop-blur-sm border border-gray-200 dark:border-dark-border rounded-full text-primary-500 font-semibold text-sm mb-4">
                         My Tech Arsenal
                     </div>
-                    <h2 className="text-4xl lg:text-5xl font-bold mb-4">
-                        Skills & <span className="text-primary-500">Technologies</span>
+                    <h2 className="text-4xl lg:text-5xl font-bold mb-4 bg-gradient-to-r from-gray-900 to-primary-500 dark:from-white dark:to-primary-400 bg-clip-text text-transparent">
+                        Skills & Technologies
                     </h2>
-                    <div className="w-16 h-1 bg-gradient-to-r from-primary-500 to-purple-600 rounded mx-auto"></div>
+                    <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+                        A comprehensive showcase of my technical expertise across various domains
+                    </p>
                 </div>
 
-                <div className="grid lg:grid-cols-2 xl:grid-cols-3 gap-8">
-                    {skillCategories.map((category, categoryIndex) => (
-                        <div
-                            key={categoryIndex}
-                            className="bg-white dark:bg-dark-bg rounded-2xl p-8 border border-gray-200 dark:border-dark-border shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 relative overflow-hidden"
+                {/* Category Navigation */}
+                <div className="flex flex-wrap justify-center gap-3 mb-12">
+                    {skillCategories.map((category, index) => (
+                        <button
+                            key={index}
+                            onClick={() => setActiveCategory(index)}
+                            className={`px-6 py-3 rounded-2xl font-semibold transition-all duration-300 transform hover:scale-105 backdrop-blur-sm border ${activeCategory === index
+                                    ? `bg-gradient-to-r ${category.gradient} text-white shadow-lg scale-105 border-transparent`
+                                    : 'bg-white/80 dark:bg-dark-bg/80 text-gray-600 dark:text-gray-300 border-gray-200 dark:border-dark-border hover:shadow-md'
+                                }`}
                         >
-                            {/* Top accent bar */}
-                            <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary-500 to-purple-600"></div>
+                            <div className="flex items-center gap-2">
+                                <span>{category.icon}</span>
+                                <span>{category.title}</span>
+                            </div>
+                        </button>
+                    ))}
+                </div>
 
-                            <div className="flex items-center gap-4 mb-6">
-                                <div className="w-14 h-14 bg-gradient-to-br from-primary-500 to-purple-600 rounded-xl flex items-center justify-center text-white text-xl">
+                {/* Skills Grid */}
+                <div className="grid lg:grid-cols-2 xl:grid-cols-3 gap-6">
+                    {skillCategories[activeCategory].skills.map((skill, index) => (
+                        <SkillCard
+                            key={index}
+                            skill={skill}
+                            index={index}
+                            gradient={skillCategories[activeCategory].gradient}
+                        />
+                    ))}
+                </div>
+
+                {/* All Categories Overview */}
+                <div className="mt-16">
+                    <h3 className="text-2xl font-bold text-center text-gray-900 dark:text-white mb-8">
+                        Technology Overview
+                    </h3>
+                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+                        {skillCategories.map((category, index) => (
+                            <div
+                                key={index}
+                                className="text-center group cursor-pointer"
+                                onClick={() => setActiveCategory(index)}
+                            >
+                                <div className={`w-16 h-16 mx-auto rounded-2xl bg-gradient-to-r ${category.gradient} flex items-center justify-center text-white text-2xl mb-3 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-12 shadow-lg`}>
                                     {category.icon}
                                 </div>
-                                <h3 className="text-2xl font-bold text-gray-900 dark:text-white">{category.title}</h3>
+                                <div className="text-sm font-semibold text-gray-700 dark:text-gray-300">
+                                    {category.title}
+                                </div>
+                                <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                                    {category.skills.length} skills
+                                </div>
                             </div>
-
-                            <div className="space-y-6">
-                                {category.skills.map((skill, skillIndex) => (
-                                    <SkillBar key={skillIndex} skill={skill} delay={skillIndex * 100} />
-                                ))}
-                            </div>
-                        </div>
-                    ))}
+                        ))}
+                    </div>
                 </div>
             </div>
         </section>
     );
 }
 
-function SkillBar({ skill, delay }: { skill: Skill; delay: number }) {
+function SkillCard({ skill, index, gradient }: { skill: Skill; index: number; gradient: string }) {
     const progressRef = useRef<HTMLDivElement>(null);
+    const [isVisible, setIsVisible] = useState(false);
 
     useEffect(() => {
         const timer = setTimeout(() => {
+            setIsVisible(true);
             if (progressRef.current) {
-                progressRef.current.style.width = `${skill.percentage}%`;
+                setTimeout(() => {
+                    progressRef.current!.style.width = `${skill.percentage}%`;
+                }, 100);
             }
-        }, delay + 500);
+        }, index * 100);
 
         return () => clearTimeout(timer);
-    }, [skill.percentage, delay]);
+    }, [skill.percentage, index]);
 
     return (
-        <div className="space-y-2">
-            <div className="flex justify-between items-center">
-                <span className="font-semibold text-gray-900 dark:text-white">{skill.name}</span>
-                <span className="text-primary-500 font-semibold">{skill.percentage}%</span>
-            </div>
-            <div className="h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
-                <div
-                    ref={progressRef}
-                    className="h-full bg-gradient-to-r from-primary-500 to-purple-600 rounded-full transition-all duration-1000 ease-out"
-                    style={{ width: '0%' }}
-                ></div>
+        <div className="group">
+            <div className="bg-white/80 dark:bg-dark-bg/80 backdrop-blur-lg rounded-3xl p-6 border border-gray-200/50 dark:border-dark-border/50 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 relative overflow-hidden">
+                {/* Animated Background */}
+                <div className={`absolute inset-0 bg-gradient-to-r ${gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-500`}></div>
+
+                {/* Glow Effect */}
+                <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-transparent via-white/10 to-transparent transform -skew-x-12 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
+
+                {/* Skill Header */}
+                <div className="flex items-center justify-between mb-4 relative z-10">
+                    <div className="flex items-center gap-3">
+                        <div className={`w-12 h-12 rounded-xl ${skill.color} flex items-center justify-center text-white text-lg shadow-lg`}>
+                            {skill.icon}
+                        </div>
+                        <div>
+                            <h3 className="font-bold text-gray-900 dark:text-white text-lg">{skill.name}</h3>
+                            <div className="flex items-center gap-1">
+                                <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                                <span className="text-xs text-gray-500 dark:text-gray-400">Proficient</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="text-right">
+                        <div className="text-2xl font-bold bg-gradient-to-r from-primary-500 to-purple-600 bg-clip-text text-transparent">
+                            {skill.percentage}%
+                        </div>
+                    </div>
+                </div>
+
+                {/* Progress Bar */}
+                <div className="relative z-10">
+                    <div className="flex justify-between text-sm text-gray-600 dark:text-gray-400 mb-2">
+                        <span>Experience</span>
+                        <span>Mastery</span>
+                    </div>
+                    <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden shadow-inner">
+                        <div
+                            ref={progressRef}
+                            className={`h-full bg-gradient-to-r ${gradient} rounded-full transition-all duration-1000 ease-out transform origin-left ${isVisible ? 'scale-x-100' : 'scale-x-0'
+                                }`}
+                            style={{ width: '0%' }}
+                        >
+                            {/* Shimmer Effect */}
+                            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent transform -skew-x-12 animate-shimmer"></div>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Skill Level Indicator */}
+                <div className="flex justify-between items-center mt-3 text-xs text-gray-500 dark:text-gray-400">
+                    <span>Beginner</span>
+                    <span>Advanced</span>
+                </div>
+
+                {/* Hover Effect Border */}
+                <div className={`absolute inset-0 rounded-3xl border-2 border-transparent bg-gradient-to-r ${gradient} bg-clip-border opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10`}>
+                    <div className="absolute inset-[2px] rounded-3xl bg-white dark:bg-dark-bg"></div>
+                </div>
             </div>
         </div>
     );
