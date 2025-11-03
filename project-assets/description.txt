@@ -1,0 +1,1 @@
+A modern e-commerce platform built with Next.js and Stripe integration. Features include real-time inventory management, user authentication, and responsive design.
