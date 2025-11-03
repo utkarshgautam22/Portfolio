@@ -1,0 +1,101 @@
+/* app/globals.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    --primary-color: #6366f1;
+    --primary-dark: #4f46e5;
+    --secondary-color: #10b981;
+    --accent-color: #f59e0b;
+}
+
+.dark {
+    --primary-color: #818cf8;
+    --primary-dark: #6366f1;
+    --secondary-color: #34d399;
+    --accent-color: #fbbf24;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    cursor: none;
+}
+
+/* Custom utility classes */
+@layer components {
+    .btn-primary {
+        @apply bg-gradient-to-br from-primary-500 to-purple-600 text-white px-7 py-4 rounded-xl font-semibold transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5 flex items-center gap-2;
+    }
+
+    .btn-secondary {
+        @apply border-2 border-primary-500 text-primary-500 px-7 py-4 rounded-xl font-semibold transition-all duration-300 hover:bg-primary-500 hover:text-white hover:shadow-lg hover:-translate-y-0.5 flex items-center gap-2;
+    }
+
+    .section-padding {
+        @apply py-20 lg:py-28;
+    }
+
+    .container-custom {
+        @apply container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl;
+    }
+}
+
+/* Loading animation */
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.animate-spin-slow {
+    animation: spin 3s linear infinite;
+}
+
+/* Wave animation */
+@keyframes wave {
+
+    0%,
+    100% {
+        transform: rotate(0deg);
+    }
+
+    25% {
+        transform: rotate(20deg);
+    }
+
+    75% {
+        transform: rotate(-20deg);
+    }
+}
+
+.animate-wave {
+    animation: wave 2s ease-in-out infinite;
+}
+
+/* Cursor blink */
+@keyframes blink {
+
+    0%,
+    50% {
+        opacity: 1;
+    }
+
+    51%,
+    100% {
+        opacity: 0;
+    }
+}
+
+.animate-blink {
+    animation: blink 1s infinite;
+}
