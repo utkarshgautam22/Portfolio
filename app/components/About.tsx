@@ -64,7 +64,7 @@ export default function About() {
                                         <img
                                             src={siteConfig.personal.avatar}
                                             alt={siteConfig.personal.name}
-                                            className="w-full h-full object-cover"
+                                            className="w-full h-full object-cover transform translate-y-1000"
                                         />
                                     </div>
                                 </div>
