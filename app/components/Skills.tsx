@@ -2,6 +2,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import { siteConfig } from '@/config/site.config';
 
 interface Skill {
     name: string;
@@ -22,80 +23,35 @@ interface SkillCategory {
 export default function Skills() {
     const [activeCategory, setActiveCategory] = useState(0);
 
+    // Map skills from config to categories
     const skillCategories: SkillCategory[] = [
         {
-            icon: '💻',
-            title: 'Programming',
-            description: 'Core programming languages & problem solving',
-            gradient: 'from-blue-500 to-cyan-500',
-            skills: [
-                { name: 'Python', percentage: 90, category: 'programming', icon: '🐍', color: 'bg-gradient-to-r from-yellow-400 to-green-500' },
-                { name: 'JavaScript', percentage: 85, category: 'programming', icon: '🟨', color: 'bg-gradient-to-r from-yellow-400 to-yellow-600' },
-                { name: 'C++', percentage: 80, category: 'programming', icon: '⚡', color: 'bg-gradient-to-r from-blue-600 to-purple-600' },
-                { name: 'C', percentage: 75, category: 'programming', icon: '🔷', color: 'bg-gradient-to-r from-blue-400 to-blue-600' },
-                { name: 'Kotlin', percentage: 70, category: 'programming', icon: '🟪', color: 'bg-gradient-to-r from-purple-500 to-pink-500' }
-            ]
-        },
-        {
-            icon: '🌐',
+            icon: '🎨',
             title: 'Frontend',
             description: 'Modern web development & UI/UX',
-            gradient: 'from-purple-500 to-pink-500',
-            skills: [
-                { name: 'React', percentage: 85, category: 'frontend', icon: '⚛️', color: 'bg-gradient-to-r from-cyan-400 to-blue-500' },
-                { name: 'Next.js', percentage: 80, category: 'frontend', icon: '▲', color: 'bg-gradient-to-r from-gray-800 to-black' },
-                { name: 'HTML/CSS', percentage: 90, category: 'frontend', icon: '🎨', color: 'bg-gradient-to-r from-orange-500 to-red-500' },
-                { name: 'Tailwind CSS', percentage: 85, category: 'frontend', icon: '💨', color: 'bg-gradient-to-r from-teal-400 to-cyan-500' }
-            ]
+            gradient: 'from-blue-500 to-cyan-500',
+            skills: siteConfig.skills.frontend.map(s => ({ ...s, category: 'frontend' }))
         },
         {
             icon: '⚙️',
-            title: 'Backend & Tools',
-            description: 'Server-side development & DevOps',
+            title: 'Backend',
+            description: 'Server-side development & databases',
             gradient: 'from-green-500 to-emerald-500',
-            skills: [
-                { name: 'Node.js', percentage: 80, category: 'backend', icon: '🟢', color: 'bg-gradient-to-r from-green-500 to-green-700' },
-                { name: 'Express.js', percentage: 75, category: 'backend', icon: '🚂', color: 'bg-gradient-to-r from-gray-600 to-gray-800' },
-                { name: 'MongoDB', percentage: 70, category: 'backend', icon: '🍃', color: 'bg-gradient-to-r from-green-400 to-green-600' },
-                { name: 'Docker', percentage: 65, category: 'backend', icon: '🐳', color: 'bg-gradient-to-r from-blue-400 to-blue-600' },
-                { name: 'Git', percentage: 85, category: 'backend', icon: '📚', color: 'bg-gradient-to-r from-orange-500 to-red-500' }
-            ]
+            skills: siteConfig.skills.backend.map(s => ({ ...s, category: 'backend' }))
         },
         {
-            icon: '🛡️',
-            title: 'Cybersecurity',
-            description: 'Security tools & ethical hacking',
-            gradient: 'from-red-500 to-orange-500',
-            skills: [
-                { name: 'Network Security', percentage: 75, category: 'security', icon: '🌐', color: 'bg-gradient-to-r from-blue-500 to-indigo-500' },
-                { name: 'Reverse Engineering', percentage: 70, category: 'security', icon: '🔍', color: 'bg-gradient-to-r from-purple-500 to-pink-500' },
-                { name: 'CTF Challenges', percentage: 80, category: 'security', icon: '🏴‍☠️', color: 'bg-gradient-to-r from-red-500 to-yellow-500' },
-                { name: 'Packet Analysis', percentage: 75, category: 'security', icon: '📡', color: 'bg-gradient-to-r from-green-500 to-teal-500' }
-            ]
+            icon: '🛠️',
+            title: 'Tools',
+            description: 'Development tools & platforms',
+            gradient: 'from-orange-500 to-red-500',
+            skills: siteConfig.skills.tools.map(s => ({ ...s, category: 'tools' }))
         },
         {
-            icon: '🤖',
-            title: 'AI/ML',
-            description: 'Machine learning & data science',
-            gradient: 'from-indigo-500 to-purple-500',
-            skills: [
-                { name: 'TensorFlow', percentage: 70, category: 'ai', icon: '🧠', color: 'bg-gradient-to-r from-orange-500 to-red-500' },
-                { name: 'PyTorch', percentage: 65, category: 'ai', icon: '🔥', color: 'bg-gradient-to-r from-red-500 to-red-700' },
-                { name: 'Pandas/NumPy', percentage: 80, category: 'ai', icon: '🐼', color: 'bg-gradient-to-r from-blue-500 to-purple-500' },
-                { name: 'Scikit-learn', percentage: 75, category: 'ai', icon: '⚗️', color: 'bg-gradient-to-r from-orange-400 to-orange-600' }
-            ]
-        },
-        {
-            icon: '⚡',
-            title: 'Other Skills',
-            description: 'Additional technologies & expertise',
-            gradient: 'from-yellow-500 to-orange-500',
-            skills: [
-                { name: 'Competitive Programming', percentage: 85, category: 'other', icon: '⚔️', color: 'bg-gradient-to-r from-blue-600 to-purple-600' },
-                { name: 'Android Development', percentage: 70, category: 'other', icon: '🤖', color: 'bg-gradient-to-r from-green-400 to-green-600' },
-                { name: 'FastAPI/Flask', percentage: 75, category: 'other', icon: '🚀', color: 'bg-gradient-to-r from-gray-700 to-gray-900' },
-                { name: 'Assembly', percentage: 60, category: 'other', icon: '💾', color: 'bg-gradient-to-r from-gray-500 to-gray-700' }
-            ]
+            icon: '💼',
+            title: 'Other',
+            description: 'Additional skills & technologies',
+            gradient: 'from-purple-500 to-pink-500',
+            skills: siteConfig.skills.other.map(s => ({ ...s, category: 'other' }))
         }
     ];
 
@@ -122,8 +78,8 @@ export default function Skills() {
                             key={index}
                             onClick={() => setActiveCategory(index)}
                             className={`px-6 py-3 rounded-2xl font-semibold transition-all duration-300 transform hover:scale-105 backdrop-blur-sm border ${activeCategory === index
-                                    ? `bg-gradient-to-r ${category.gradient} text-white shadow-lg scale-105 border-transparent`
-                                    : 'bg-white/80 dark:bg-dark-bg/80 text-gray-600 dark:text-gray-300 border-gray-200 dark:border-dark-border hover:shadow-md'
+                                ? `bg-gradient-to-r ${category.gradient} text-white shadow-lg scale-105 border-transparent`
+                                : 'bg-white/80 dark:bg-dark-bg/80 text-gray-600 dark:text-gray-300 border-gray-200 dark:border-dark-border hover:shadow-md'
                                 }`}
                         >
                             <div className="flex items-center gap-2">

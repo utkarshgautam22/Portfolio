@@ -7,7 +7,7 @@ export default function About() {
     const [activeTab, setActiveTab] = useState('about');
 
     const stats = [
-        { number: '50+', label: 'Projects Completed', icon: '🚀' },
+        { number: '20+', label: 'Projects Completed', icon: '🚀' },
         { number: '2+', label: 'Years Experience', icon: '💼' },
         { number: '10+', label: 'Technologies', icon: '🛠️' },
         { number: '∞', label: 'Cups of Coffee', icon: '☕' }
@@ -59,8 +59,12 @@ export default function About() {
                             <div className="text-center">
                                 <div className="w-32 h-32 mx-auto mb-6 relative">
                                     <div className="absolute inset-0 bg-gradient-to-br from-primary-500 to-purple-600 rounded-2xl transform rotate-6"></div>
-                                    <div className="relative w-full h-full bg-gradient-to-br from-blue-400 to-purple-600 rounded-2xl flex items-center justify-center text-white text-4xl border-4 border-white dark:border-dark-bg shadow-lg">
-                                        👨‍💻
+                                    <div className="relative w-full h-full rounded-2xl overflow-hidden border-4 border-white dark:border-dark-bg shadow-lg">
+                                        <img
+                                            src="/images/avatar.jpg"
+                                            alt="Utkarsh Gautam"
+                                            className="w-full h-full object-cover"
+                                        />
                                     </div>
                                 </div>
                                 <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">Utkarsh Gautam</h3>
@@ -101,8 +105,8 @@ export default function About() {
                                     key={tab}
                                     onClick={() => setActiveTab(tab)}
                                     className={`flex-1 py-3 px-4 rounded-xl font-semibold transition-all duration-300 capitalize ${activeTab === tab
-                                            ? 'bg-gradient-to-r from-primary-500 to-purple-600 text-white shadow-lg'
-                                            : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white'
+                                        ? 'bg-gradient-to-r from-primary-500 to-purple-600 text-white shadow-lg'
+                                        : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white'
                                         }`}
                                 >
                                     {tab}
