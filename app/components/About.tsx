@@ -2,6 +2,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { siteConfig } from '@/config/site.config';
 
 export default function About() {
     const [activeTab, setActiveTab] = useState('about');
@@ -61,16 +62,16 @@ export default function About() {
                                     <div className="absolute inset-0 bg-gradient-to-br from-primary-500 to-purple-600 rounded-2xl transform rotate-6"></div>
                                     <div className="relative w-full h-full rounded-2xl overflow-hidden border-4 border-white dark:border-dark-bg shadow-lg">
                                         <img
-                                            src="/images/avatar.jpg"
-                                            alt="Utkarsh Gautam"
+                                            src={siteConfig.personal.avatar}
+                                            alt={siteConfig.personal.name}
                                             className="w-full h-full object-cover"
                                         />
                                     </div>
                                 </div>
-                                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">Utkarsh Gautam</h3>
-                                <p className="text-primary-500 font-semibold mb-4">Full Stack Developer & Security Enthusiast</p>
+                                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">{siteConfig.personal.name}</h3>
+                                <p className="text-primary-500 font-semibold mb-4">{siteConfig.personal.title}</p>
                                 <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
-                                    CSE Student @ NIT Calicut • Building tools, breaking systems, and solving real-world problems
+                                    {siteConfig.personal.location} • {siteConfig.personal.bio.split('.')[0]}
                                 </p>
                             </div>
                         </div>

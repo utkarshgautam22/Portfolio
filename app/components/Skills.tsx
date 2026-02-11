@@ -45,15 +45,8 @@ export default function Skills() {
             description: 'Development tools & platforms',
             gradient: 'from-orange-500 to-red-500',
             skills: siteConfig.skills.tools.map(s => ({ ...s, category: 'tools' }))
-        },
-        {
-            icon: '💼',
-            title: 'Other',
-            description: 'Additional skills & technologies',
-            gradient: 'from-purple-500 to-pink-500',
-            skills: siteConfig.skills.other.map(s => ({ ...s, category: 'other' }))
         }
-    ];
+    ].filter(category => category.skills.length > 0);
 
     return (
         <section id="skills" className="section-padding bg-gradient-to-br from-gray-50 to-blue-50 dark:from-dark-surface dark:to-gray-900">

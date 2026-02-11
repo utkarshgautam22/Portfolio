@@ -2,6 +2,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { siteConfig } from '@/config/site.config';
 
 export default function Hero() {
     const [currentText, setCurrentText] = useState('');
@@ -52,10 +53,10 @@ export default function Hero() {
 
                         <h1 className="text-5xl lg:text-7xl font-bold leading-tight">
                             <span className="block bg-gradient-to-r from-gray-900 to-primary-500 dark:from-white dark:to-primary-400 bg-clip-text text-transparent">
-                                Utkarsh
+                                {siteConfig.personal.name.split(' ')[0]}
                             </span>
                             <span className="block bg-gradient-to-r from-primary-500 to-purple-600 bg-clip-text text-transparent">
-                                Gautam
+                                {siteConfig.personal.name.split(' ')[1]}
                             </span>
                         </h1>
 
@@ -65,8 +66,7 @@ export default function Hero() {
                         </div>
 
                         <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed max-w-lg">
-                            A curious CSE student at NIT Calicut, passionate about exploring new technologies.
-                            Building tools, breaking systems, and solving real-world problems.
+                            {siteConfig.personal.bio}
                         </p>
 
                         <div className="flex flex-col sm:flex-row gap-4 pt-4">
@@ -102,10 +102,9 @@ export default function Hero() {
                         <div className="relative w-80 h-80 lg:w-96 lg:h-96">
                             <div className="absolute inset-0 bg-gradient-to-br from-primary-500 to-purple-600 rounded-full transform rotate-45"></div>
                             <div className="relative w-full h-full rounded-full border-8 border-white dark:border-dark-bg shadow-2xl overflow-hidden">
-                                {/* Replace with your actual image */}
                                 <img
-                                    src="/images/p.png"
-                                    alt="Utkarsh Gautam"
+                                    src={siteConfig.personal.avatar}
+                                    alt={siteConfig.personal.name}
                                     className="w-full h-full object-cover"
                                     onError={(e) => {
                                         // Fallback if image doesn't exist
@@ -117,7 +116,7 @@ export default function Hero() {
                         <div class="w-full h-full bg-gradient-to-br from-blue-400 to-purple-600 flex items-center justify-center text-white">
                           <div class="text-center">
                             <div class="text-4xl mb-2">👨‍💻</div>
-                            <div class="text-sm">Utkarsh Gautam</div>
+                            <div class="text-sm">${siteConfig.personal.name}</div>
                           </div>
                         </div>
                       `;
